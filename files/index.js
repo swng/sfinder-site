@@ -124,7 +124,7 @@ canvas.onmousedown = function mousedown(e) {
     mouseY = Math.floor((e.clientY - rect.top - 2) / cellSize);
     mouseX = Math.floor((e.clientX - rect.left - 102) / cellSize);
 
-    if (inRange(mouseX, 0, 9) && inRange(mouseY, 0, 21)) {
+    if (inRange(mouseX, 0, 9) && inRange(mouseY, 0, 19)) {
         if (!mouseDown) {
             movingCoordinates = false;
             drawMode = e.button != 0 || board[mouseY][mouseX] != 0;
@@ -162,7 +162,7 @@ canvas.addEventListener("touchmove", (e) => {
     let y = Math.floor((e.touches[0].clientY - rect.top - 2) / cellSize);
     let x = Math.floor((e.touches[0].clientX - rect.left - 102) / cellSize);
 
-    if (inRange(x, 0, 9) && inRange(y, 0, 21)) {
+    if (inRange(x, 0, 9) && inRange(y, 0, 19)) {
         movingCoordinates = y != mouseY || x != mouseX;
 
         mouseY = y;
@@ -180,6 +180,10 @@ canvas.addEventListener("touchmove", (e) => {
 })
 
 canvas.addEventListener("touchstart", (e) => { 
+    canvas.onmousedown = null;
+    canvas.onmousemove = null;
+    document.onmouseup = null;
+
     rect = canvas.getBoundingClientRect();
     mouseY = Math.floor((e.touches[0].clientY - rect.top - 2) / cellSize);
     mouseX = Math.floor((e.touches[0].clientX - rect.left - 102) / cellSize);
@@ -201,7 +205,7 @@ canvas.addEventListener("touchstart", (e) => {
     }
 })
 
-canvas.addEventListener("touchend", (e) => {
+document.addEventListener("touchend", (e) => {
     mouseDown = false;
     if (drawMode) {
         // compare board oldboard and attempt to autocolor
