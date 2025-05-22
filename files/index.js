@@ -495,6 +495,26 @@ function checkImage(url) {
 	};
 }
 
+document.getElementById("fumen").addEventListener("input", trySettingBoard);
+
+function trySettingBoard() {
+    try {
+        let pages = decoder.decode(document.getElementById('fumen').value);
+        let pieces = pages[0]._field.field.pieces;
+        const map = [0,5,2,3,1,7,6,4,8]; // fumen format to sixwide format
+        for (let i = 0; i < 200; i++) {
+            const row = 19 - Math.floor(i / 10);
+            const col = i % 10;
+
+            board[row][col] = map[pieces[i]];
+        }
+        graficks();
+
+    } catch {
+        return;
+    }
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
 
@@ -504,7 +524,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const clearLines = params.get("clearLines");
     const queue = params.get("queue");
 
-    if (fumen !== null) document.getElementById("fumen").value = fumen;
+    if (fumen !== null) {document.getElementById("fumen").value = fumen; trySettingBoard();}
     if (command !== null) document.getElementById("command").value = command;
     if (game !== null) document.getElementById("game").value = game;
     if (clearLines !== null) document.getElementById("clearLines").value = clearLines;
