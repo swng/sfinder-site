@@ -42,12 +42,14 @@ async function tryRendering(fumen) {
     try {
         let pages = decoder.decode(fumen);
         let fumen_page_list = [];
+        let comment_list = [];
         for (let page of pages) {
             page.flags.colorize = true;
             let temp_fumen = encoder.encode([page])
             fumen_page_list.push(temp_fumen);
+            comment_list.push(page.comment);
         }
-        fumenrender(fumen_page_list, container);
+        fumenrender(fumen_page_list, container, comment_list);
 
     } catch {
         return;
@@ -154,6 +156,66 @@ document.onmouseup = function mouseup(e) {
         }
     }
 };
+
+canvas.addEventListener("touchmove", (e) => {
+    rect = canvas.getBoundingClientRect();
+    let y = Math.floor((e.touches[0].clientY - rect.top - 2) / cellSize);
+    let x = Math.floor((e.touches[0].clientX - rect.left - 102) / cellSize);
+
+    if (inRange(x, 0, 9) && inRange(y, 0, 21)) {
+        movingCoordinates = y != mouseY || x != mouseX;
+
+        mouseY = y;
+        mouseX = x;
+
+        if (mouseDown && movingCoordinates) {
+            if (!drawMode) {
+                board[mouseY][mouseX] = 0;
+            } else {
+                board[mouseY][mouseX] = paintbucketColor();
+            }
+            graficks();
+        }
+    }
+})
+
+canvas.addEventListener("touchstart", (e) => { 
+    rect = canvas.getBoundingClientRect();
+    mouseY = Math.floor((e.touches[0].clientY - rect.top - 2) / cellSize);
+    mouseX = Math.floor((e.touches[0].clientX - rect.left - 102) / cellSize);
+
+    if (inRange(mouseX, 0, 9) && inRange(mouseY, 0, 21)) {
+        if (!mouseDown) {
+            movingCoordinates = false;
+            drawMode = board[mouseY][mouseX] != 0;
+            if (drawMode) {
+                board[mouseY][mouseX] = 0;
+            } else {
+                oldBoard = JSON.parse(JSON.stringify(board));
+                board[mouseY][mouseX] = paintbucketColor();
+            }
+            graficks();
+        }
+        mouseDown = true;
+        drawMode = board[mouseY][mouseX] != 0;
+    }
+})
+
+canvas.addEventListener("touchend", (e) => {
+    mouseDown = false;
+    if (drawMode) {
+        // compare board oldboard and attempt to autocolor
+        drawn = [];
+        board.map((r, i) => {
+            r.map((c, ii) => {
+                if (c != 0 && c != oldBoard[i][ii]) drawn.push({ y: i, x: ii });
+            });
+        });
+        if (drawn.length == 4) {
+            // bleh do autocolor later
+        }
+    }
+})
 
 function inRange(x, min, max) {
     return x >= min && x <= max;
