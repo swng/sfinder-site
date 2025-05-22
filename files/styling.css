@@ -1,0 +1,204 @@
+input,
+button {
+	padding: 0.5em;
+	margin: 0.5em 0;
+}
+
+label {
+	font-weight: bold;
+	margin-top: 0.5em;
+	display: block;
+	color: white;
+	font-size: 30px;
+}
+
+#result {
+  white-space: pre-wrap;
+  padding: 1em;
+  margin-top: 1em;
+  border: 1px solid #ccc;
+  color: #1c1c1c;
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+body {
+	background-color: #565656;
+	font-family: Futura, Trebuchet MS, Arial, sans-serif;
+	color: white;
+}
+
+.headers {
+	float: left;
+	margin-right: 10px;
+}
+
+#discord {
+	border-radius: 25px;
+	background: #7e7e7e;
+	font-size: 30px;
+	color: white;
+	padding: 10px;
+	height: 50px;
+	float: right;
+	line-height: 50px;
+}
+
+#discord-div {
+	padding-top: 10px;
+	float: right;
+}
+
+#icon {
+	padding-right: 10px;
+	border-radius: 50%;
+}
+
+#header {
+	padding-bottom: 1px;
+	overflow: hidden;
+}
+
+a,
+button {
+	cursor: pointer;
+}
+
+a:hover,
+button:hover {
+	filter: brightness(125%);
+}
+
+button:active {
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
+}
+
+input[type='radio'] {
+	display: none;
+}
+
+.paint-bucket {
+	background: #1c1c1c;
+	display: flex;
+	flex-wrap: wrap;
+	width: 8rem;
+	padding: 2px;
+	justify-content: center;
+	margin: 20px 0;
+}
+
+.paint-bucket input[class='paintbucket']+*::before {
+	content: '';
+	display: inline-block;
+	vertical-align: bottom;
+	width: 1rem;
+	height: 1rem;
+	margin: 0.3rem;
+	border-radius: 50%;
+	border-style: solid;
+	border-width: 0.2rem;
+	filter: brightness(50%);
+}
+
+.paint-bucket input[class='paintbucket']:hover+*::before,
+.paint-bucket input[class='paintbucket']:checked+*::before {
+	border-color: white;
+}
+
+.paint-bucket input[class='paintbucket']:checked+*::before {
+	filter: brightness(150%);
+}
+
+.paint-bucket input[id='X']+*::before {
+	color: #999999;
+	background: #999999;
+}
+
+.paint-bucket input[id='I']+*::before {
+	color: #0BF;
+	background: #0BF;
+}
+
+.paint-bucket input[id='J']+*::before {
+	color: #05F;
+	background: #05F;
+}
+
+.paint-bucket input[id='S']+*::before {
+	color: #0F0;
+	background: #0F0;
+}
+
+.paint-bucket input[id='O']+*::before {
+	color: #FF0;
+	background: #FF0;
+}
+
+.paint-bucket input[id='Z']+*::before {
+	color: #F00;
+	background: #F00;
+}
+
+.paint-bucket input[id='L']+*::before {
+	color: #F80;
+	background: #F80;
+}
+
+.paint-bucket input[id='T']+*::before {
+	color: #C3F;
+	background: #C3F;
+}
+
+.myButton {
+	font-weight: bold;
+	background-color: #44c767;
+	border-radius: 16px;
+	border: 1px solid #18ab29;
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 28px;
+	text-decoration: none;
+}
+
+.myButton:hover {
+	background-color: #54d777;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.solutionContainer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	width: 100%;
+}
+
+.left {
+	border-right: 1px solid #ccc;
+	width: 700px;
+	display: flex;
+	padding: 1rem;
+}
+
+.test-board {
+	margin-right: 10px;
+}
+
+.contrls {
+	touch-action: none;
+	overscroll-behavior: none;
+}
+
+.right-side {
+	margin-left: 3%;
+	flex: 1;
+	min-width: 300px;
+}
+

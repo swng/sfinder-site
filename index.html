@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>SFinder Site</title>
+  <link rel="stylesheet" href="files/styling.css">
+  <link rel="icon" href="files/knewjade.png">
+</head>
+
+<body>
+
+  <div id="header">
+    <div id="discord-div">
+      <a id="login"
+        href="https://discord.com/api/oauth2/authorize?client_id=1372714533851762830&amp;redirect_uri=https%3A%2F%2Fsfinder.sixwi.de%2F&amp;response_type=token&amp;scope=identify"
+        style="display: block;">
+        <div id="discord">
+          <img src="files/discord.png" height="50" width="50" alt="Discord" id="icon" class="headers">
+          <div id="info" class="headers">
+            Connect
+          </div>
+        </div>
+      </a>
+    </div>
+    <div id="blurb">
+      Use this site to call the sfinder API. Please be considerate and don't spam requests - compute resources are finite. Discord login is encouraged;
+      if the server is busy, guest users may get malformed results.
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="left">
+    <div class="test-board">
+      <canvas tabindex='1' id="tetris" class="contrls" width="504" height="604" background-color: #7e7e7e></canvas>
+    </div>
+    <div class="utils">
+      <form class="paint-bucket" name="paintbucket">
+        <label for="X">
+          <input type="radio" name="paintbucket" class="paintbucket" id="X" value=8 checked />
+          <span></span>
+        </label>
+        <label for="I">
+          <input type="radio" name="paintbucket" class="paintbucket" id="I" value=5 />
+          <span></span>
+        </label>
+        <label for="J">
+          <input type="radio" name="paintbucket" class="paintbucket" id="J" value=6 />
+          <span></span>
+        </label>
+        <label for="S">
+          <input type="radio" name="paintbucket" class="paintbucket" id="S" value=4 />
+          <span></span>
+        </label>
+        <label for="O">
+          <input type="radio" name="paintbucket" class="paintbucket" id="O" value=3 />
+          <span></span>
+        </label>
+        <label for="Z">
+          <input type="radio" name="paintbucket" class="paintbucket" id="Z" value=1 />
+          <span></span>
+        </label>
+        <label for="L">
+          <input type="radio" name="paintbucket" class="paintbucket" id="L" value=2 />
+          <span></span>
+        </label>
+        <label for="T">
+          <input type="radio" name="paintbucket" class="paintbucket" id="T" value=7 />
+          <span></span>
+        </label>
+      </form>
+      <button type="button" class="myButton" onclick="this.blur(); importImageButton()">Import from Image</button>
+      <button type="button" class="myButton" onclick="this.blur(); exportFumen()">Get fumen</button>
+    </div>
+    </div>
+
+    <div id="right-side" class="right-side">
+
+      <h1>SFinder Site</h1>
+
+      <label for="fumen">Fumen</label>
+      <textarea id="fumen" placeholder="v115@..." style="width: 600px; height: 100px;"></textarea>
+
+      <label for="command">Command</label>
+      <select id="command">
+        <option value="path">PC Path</option>
+      </select>
+
+      <label for="game">Game</label>
+      <select id="game">
+        <option value="jstris">jstris</option>
+        <option value="tetrio">tetrio</option>
+        <option value="nullpomino">nullpomino</option>
+        <option value="srs">srs</option>
+        <option value="nokicks">nokicks</option>
+      </select>
+
+      <label for="clearLines">Clear Lines</label>
+      <input type="number" id="clearLines" placeholder="e.g. 4">
+
+      <label for="queue">Queue</label>
+      <input type="text" id="queue" oninput="this.value = this.value
+        .replace(/[^LSJZIOT\[\]\*\!,p0-9]/gi, '')  // allow specified characters
+        .replace(/[^p]/g, c => c.toUpperCase());   // uppercase everything except 'p'"
+        placeholder="e.g. TSZJ">
+        <br>
+
+      <button class="myButton" onclick="runSFinder()">Run SFinder</button>
+
+      <div id="result" class="result"></div>
+
+    </div>
+
+  </div>
+  <br>
+  <div id="solutionContainer" class="solutionContainer">
+  </div>
+
+  <script src="files/tetris-fumen.js"></script>
+  <script src="files/fumen-render.js"></script>
+  <script src="files/index.js" difficulty="test" setup="controls" id="gameCode"></script>
+
+</body>
+
+</html>
