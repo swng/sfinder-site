@@ -18,8 +18,9 @@ async function runSFinder() {
         });
 
         if (!response.ok) {
-          responseBox.textContent = "Error: " + response.statusText;
-          return;
+            const errorData = await response.json();
+            responseBox.textContent = "Error: " + (errorData.error || response.statusText);
+            return;
         }
 
         // const resultText = await response.text();
@@ -39,7 +40,7 @@ async function runSFinder() {
 
 async function tryRendering(fumen) {
     let container = document.getElementById("solutionContainer");
-    try {
+    try { // single fumen
         let pages = decoder.decode(fumen);
         let fumen_page_list = [];
         let comment_list = [];
@@ -52,7 +53,12 @@ async function tryRendering(fumen) {
         fumenrender(fumen_page_list, container, comment_list);
 
     } catch {
-        return;
+        try { // multiple fumens?
+            fumenrender(fumen, container);
+        }
+        catch {
+            
+        }
     }
 }
 
