@@ -74,8 +74,6 @@ async function exportFumen() {
 
 const colors = ["#000000", "#FF0100", "#FEAA00", "#FFFE02", "#00EA01", "#00DDFF", "#0000FF", "#AA00FE", "#555555"];
 
-const empty_line = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
 const canvas = document.getElementById("tetris");
 const ctx = canvas.getContext("2d");
 const height = 600;
