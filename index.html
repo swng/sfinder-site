@@ -103,7 +103,7 @@
 
       <label for="queue">Queue</label>
       <input type="text" id="queue" oninput="this.value = this.value
-        .replace(/[^LSJZIOT\[\]\*\!,p0-9]/gi, '')  // allow specified characters
+        .replace(/[^LSJZIOT\[\]\*\!,p0-9\^]/gi, '')  // allow specified characters
         .replace(/[^p]/g, c => c.toUpperCase());   // uppercase everything except 'p'"
         placeholder="e.g. TSZJ">
         <br>
