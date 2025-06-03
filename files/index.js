@@ -23,15 +23,25 @@ async function runSFinder() {
             return;
         }
 
-        // const resultText = await response.text();
-        // responseBox.textContent = resultText;
-        const resultJson = await response.json();
-        const resultResult = resultJson.result;
+        let resultText;
 
-        responseBox.textContent = resultResult;
-        // responseBox.innerHTML = `<a href="${resultUrl}" target="_blank">${resultUrl}</a>`;
+        try {
+            if (!response.ok) {
+                const errorText = await response.text();
+                responseBox.textContent = `Server error (${response.status}): ${errorText}`;
+                return;
+            }
+            
+            const resultJson = await response.json();
+            resultText = resultJson.result || "No result found.";
+        } catch (error) {
+            resultText = "Request failed: " + error.message;
+        }
 
-        tryRendering(resultResult);
+        // Display result or error
+        responseBox.textContent = resultText;
+
+        tryRendering(resultText);
 
       } catch (err) {
         responseBox.textContent = "Request failed: " + err.message;
