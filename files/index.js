@@ -1,9 +1,16 @@
+let initial_b2b = "false";
+let initial_combo = 0;
+let b2b_bonus = 0;
+
 async function runSFinder() {
       const fumen = document.getElementById('fumen').value;
       const clearLines = parseInt(document.getElementById('clearLines').value);
       const queue = document.getElementById('queue').value;
       const game = document.getElementById('game').value;
       const command = document.getElementById('command').value;
+    //   const initial_b2b = 
+    //   const initial_combo = 
+    //   const b2b_bonus = 
 
       const responseBox = document.getElementById('result');
       responseBox.textContent = "Loading...";
@@ -14,7 +21,7 @@ async function runSFinder() {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ fumen, clearLines, queue, game, accessToken, tokenType, command })
+          body: JSON.stringify({ fumen, clearLines, queue, game, accessToken, tokenType, command, initial_b2b, initial_combo, b2b_bonus })
         });
 
         if (!response.ok) {
