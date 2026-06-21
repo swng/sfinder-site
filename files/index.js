@@ -1,6 +1,7 @@
 let initial_b2b = "false";
 let initial_combo = 0;
 let b2b_bonus = 0;
+let minimal_type = "TSS";
 
 async function runSFinder() {
       const fumen = document.getElementById('fumen').value;
@@ -21,7 +22,7 @@ async function runSFinder() {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ fumen, clearLines, queue, game, accessToken, tokenType, command, initial_b2b, initial_combo, b2b_bonus })
+          body: JSON.stringify({ fumen, clearLines, queue, game, accessToken, tokenType, command, initial_b2b, initial_combo, b2b_bonus, minimal_type })
         });
 
         if (!response.ok) {
